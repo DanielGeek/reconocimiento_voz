@@ -1,0 +1,249 @@
+
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+
+	<title>VozMe Gadget</title>
+		
+	<!-- <script type="text/javascript" src="http://ezweb.tid.es/repository/js/json2.js"></script>
+	<script type="text/javascript" src="http://ezweb.tid.es/repository/js/eskel/1.0_beta3/EzWebAPI_ext.js"></script> -->
+
+	<script type="text/javascript" language="javascript" charset="utf-8">
+
+	 function isIE(userAgent) {
+		userAgent = userAgent || navigator.userAgent;
+			return userAgent.indexOf("MSIE ") > -1 || userAgent.indexOf("Trident/") > -1 || userAgent.indexOf("Edge/") > -1;
+	}
+	
+	if (isIE()) {
+		document.write("<LINK REL='stylesheet' HREF='css/styleIE.css' TYPE='text/css'>");
+	}
+	else {
+		document.write("<LINK REL='stylesheet' HREF='css/style.css' TYPE='text/css'>");
+		var estilo = document.write("<LINK REL='stylesheet' HREF='css/style.css' TYPE='text/css'>");
+		
+	    // appendStyle("css/style.css");
+	}
+	
+	// <![CDATA[
+		// var text = createRGadgetVariable("text", function(text){
+		// 			document.getElementById('formulario').text.value= text;
+		// 		});
+		var languages = {"en":{
+							"goto": "go to VozMe.com",
+							"languageLabel":"Language",
+							"genre":"Genre",
+							"male":"Male",
+							"female":"Female",
+							"writeto":"Write to the text...",
+							"en":"English",
+							"es":"Spanish",
+							"it":"Italian",
+							"pt":"Portuguese",
+							"ca":"Catalan",
+							"ok":"Ok",
+							"errorMsg":"The text field can not be avoid",
+							"play":"Play"
+						},
+						"es":{
+							"goto":"ir a VozMe.com",
+							"languageLabel":"Idioma",
+							"genre":"Género",
+							"male":"Masculino",
+							"female":"Femenino",
+							"writeto":"Escribir el texto ...",
+							"en":"Inglés",
+							"es":"Español",
+							"it":"Italiano",
+							"pt":"Portugués",
+							"ca":"Catalán",
+							"ok":"Aceptar",
+							"errorMsg":"El campo texto no puede estar vacío",
+							"play":"Reproducir"
+						},
+						"pt":{
+							"goto": "go to VozMe.com",
+							"languageLabel":"Language",
+							"genre":"Genre",
+							"male":"Male",
+							"female":"Female",
+							"writeto":"Write to the text...",
+							"en":"English",
+							"es":"Spanish",
+							"it":"Italian",
+							"pt":"Portuguese",
+							"ca":"Catalan",
+							"ok":"Ok",
+							"errorMsg":"The text field can not be avoid",
+							"play":"Play"
+						}};
+		var _ = function(key) {
+			if (languages[language.get()] && languages[language.get()][key]) {
+				return languages[language.get()][key];
+			}
+			else {
+				return key;
+			}
+		};
+		var _attribute = function(key, value){
+			if (document.getElementById(value)){
+				element = document.getElementById(value);
+				element.setAttribute(key, _(value));
+			}
+		};
+		var _child = function(value){
+			if (document.getElementById(value)){
+				element = document.getElementById(value);
+				element.innerHTML = ""; 
+				element.appendChild(document.createTextNode(_(value)));
+			}
+		};
+		// var language = EzWebAPI.createRGadgetVariable("language", function(){
+		// 			var lang = language.get();
+		// 			switch (lang){
+		// 				case "es":
+		// 					document.getElementById('language').value="es";
+		// 					break;
+		// 				case "en":
+		// 					document.getElementById('language').value="en";
+		// 					break;
+		// 				case "pt":
+		// 					document.getElementById('language').value="pt";
+		// 					break;
+		// 			}
+					
+		// 			_attribute("title", "goto");
+		// 			_child("languageLabel");
+		// 			_child("genre");
+		// 			_child("male");
+		// 			_child("female");
+		// 			_child("writeto");
+		// 			_child("en");
+		// 			_child("es");
+		// 			_child("it");
+		// 			_child("pt");
+		// 			_child("ca");
+		// 			_child("ok");
+		// 			_child("errorMsg");
+		// 			_attribute("value", "play");
+		// 	});
+			
+		this.over= false;
+		function showPlayer() {
+			document.getElementById('playerFrame').style.display = 'table';
+			document.body.style.overflow = "hidden";
+			document.body.scrollTop = 0;
+		}
+		function hidenPlayer() {
+			document.getElementById('playerFrame').style.display = 'none';
+			document.body.style.overflow = "auto";
+		}
+		function closePlayer() {
+			hidenPlayer();
+		}
+		function openPlayer() {
+			showPlayer();
+		}
+		function comprobarCampos(formulario){
+			var patron = /[a-zA-Z0-9]/;
+		
+			if(formulario.text.value.search(patron) == -1){
+				//Mostrar la ventana con el mensaje de error
+				openError();
+				return false;
+			}
+			openPlayer();
+			return true;
+			
+		}
+		function closeError(){
+			document.getElementById('divError').style.display = 'none';
+			document.body.style.overflow = "auto";
+		}
+		function openError(){
+			document.getElementById('divError').style.display = 'table';
+			document.body.style.overflow = "hidden";
+			document.body.scrollTop = 0;
+		}
+		function changeSrc(){
+			
+				document.getElementById('b_close').src = "img/ibclosehover.png";
+			
+		}
+		function changeSrcInit(){
+				document.getElementById('b_close').src = "img/bclose.png";
+		}
+	// ]]>
+	</script>
+
+</head>
+<body>
+	<div id="line"></div>
+	<div id="head">
+		<h1><a id="goto" href="http://vozme.com" title="ir a VozMe.com"><img src="img/logo.png" alt="VozMe Gadget"/></a></h1>
+	</div>
+	<div id="body">
+		<form id="formulario" action="http://vozme.com/text2voice.php" method="post" target="iPlay" onSubmit="return comprobarCampos(this);">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td>
+						<label id="languageLabel">Idioma</label>:
+						<select id="language" name="lang">
+							<option id="es" value="es">Spanish</option>
+							<option id="en" value="en">English</option>
+							<option id="it" value="it">Italian</option>
+							<option id="pt" value="pt">Portuguese</option>
+							<option id="ca" value="ca">Catalan</option>
+						</select>
+					</td>
+					<td style="text-align:right">
+						<label id="genre">Genero</label>:
+						<select name="gn">
+							<option id="male" value="ml" selected="selected">Male</option>
+							<option id="female" value="fm">Female</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<label id="writeto" >Escriba el Texto ...</label><br/>
+						<textarea name="text" style="width:100%;" >Texto del excel para dictar por el robot</textarea>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align:right">
+						<input id="play" type="submit" value="Reproducir"/>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div id="playerFrame" class="contenedor" style="display: none;">
+		<div class="centrado">
+		<div id="player" class="contenido">
+			<img id="b_close" src="img/bclose.png" onclick="closePlayer()" onmouseOver="changeSrc()" onmouseOut="changeSrcInit()"/>
+			<iframe name="iPlay" id="iPlay" frameborder="0"></iframe>
+		</div>
+		</div>
+	</div>
+	<div id="divError" class="contenedor" style="display:none;">
+		<div class="centrado">
+		<div id="divMessage" class="contenido">
+			<p id="errorMsg"> El campo texto no puede estar vacío </p>
+			<!--p style="text-align:center; margin-top:1.8em"-->
+				<!--span class="boton aceptar" onclick="closeError()">Aceptar</span-->
+				<button  onclick="closeError()">
+					<img src="img/ok.png">
+					
+				Aceptar</button>
+			<!--/p-->
+		</div>
+		</div>
+	</div>
+</body>
+</html>
